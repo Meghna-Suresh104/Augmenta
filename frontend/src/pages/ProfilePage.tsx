@@ -11,6 +11,7 @@ import fortImg from '@/assets/fort.jpg';
 import shawlImg from '@/assets/shawl.jpg';
 import templeImg from '@/assets/temple.jpg';
 import necklaceImg from '@/assets/necklace.jpeg';
+import bgImg from '@/assets/bg.png';
 
 const ProfilePage = () => {
   const recommendedSites = [
@@ -28,17 +29,18 @@ const ProfilePage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-heritage/5">
+    <div className="min-h-screen bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: "url('/src/assets/bg.png')" }}>
       <Header />
 
       <main className="flex-1 pb-20 px-4 sm:px-6 lg:px-8 py-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">Your Personalized Experience</h2>
+          <h2 className="text-2xl font-bold mb-6 text-white">Your Personalized Experience</h2>
 
           {/* Recommended */}
           <Card className="mb-6 bg-card/50 border-border/50">
             <CardHeader>
-              <CardTitle className="flex items-center text-lg">
+              <CardTitle className="flex items-center text-lg text-white">
                 <Heart className="w-5 h-5 mr-2 text-heritage" /> Recommended for You
               </CardTitle>
             </CardHeader>
@@ -50,9 +52,9 @@ const ProfilePage = () => {
           </Card>
 
           {/* Most Visited */}
-          <Card className="mb-6 bg-card/50 border-border/50">
+          <Card className="mb-6 bg-card/50 border-border/50 backdrop-blur">
             <CardHeader>
-              <CardTitle className="flex items-center text-lg">
+              <CardTitle className="flex items-center text-lg text-white">
                 <TrendingUp className="w-5 h-5 mr-2 text-heritage" /> Most Visited Places
               </CardTitle>
             </CardHeader>
@@ -64,9 +66,9 @@ const ProfilePage = () => {
           </Card>
 
           {/* Bestseller Handicrafts */}
-          <Card className="mb-6 bg-card/50 border-border/50">
+          <Card className="mb-6 bg-card/50 border-border/50 backdrop-blur">
             <CardHeader>
-              <CardTitle className="flex items-center text-lg">
+              <CardTitle className="flex items-center text-lg text-white">
                 <Star className="w-5 h-5 mr-2 text-heritage" /> Bestseller Handicrafts
               </CardTitle>
             </CardHeader>

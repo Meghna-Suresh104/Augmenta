@@ -13,6 +13,7 @@ import shawlImg from '@/assets/shawl.jpg';
 import boxImg from '@/assets/box.jpeg';
 import bellImg from '@/assets/bell.jpeg';
 import paintingImg from '@/assets/painting.jpg';
+import bgImg from '@/assets/bg.png';
 
 const MarketplacePage = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -33,7 +34,8 @@ const MarketplacePage = () => {
     : handicrafts.filter(item => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-heritage/5">
+    <div className="min-h-screen bg-cover bg-center bg-no-repeat text-white "
+  style={{ backgroundImage: "url('/src/assets/bg.png')" }}>
       <Header />
 
       <main className="flex-1 pb-20 px-4 sm:px-6 lg:px-8 py-6">
@@ -48,9 +50,9 @@ const MarketplacePage = () => {
             {categories.map(category => (
               <Badge
                 key={category}
-                className={`cursor-pointer px-3 py-1 text-sm rounded-full border transition-colors
+                className={`bg-gray-700 cursor-pointer px-3 py-1 text-white rounded-full border transition-colors
                   ${selectedCategory === category
-                    ? 'bg-heritage text-heritage-foreground border-heritage hover:bg-heritage/90'
+                    ? 'bg-gray-700 text-white border-heritage hover:bg-heritage/90'
                     : 'border-heritage/30 hover:border-heritage hover:bg-heritage/10'
                   }`}
                 onClick={() => setSelectedCategory(selectedCategory === category ? 'All' : category)}

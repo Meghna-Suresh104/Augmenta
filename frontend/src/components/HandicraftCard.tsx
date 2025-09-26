@@ -24,7 +24,7 @@ const HandicraftCard = ({
   artisan
 }: HandicraftCardProps) => {
   return (
-    <Card className="flex p-4 mb-4 bg-card border-border/50 hover:shadow-elevated transition-all duration-300">
+    <Card className="flex p-4 mb-4 bg-card border-border/50 hover:shadow-elevated transition-all duration-300 bg-yellow-50 text-black">
       {/* Image on the left */}
       <div className="relative flex-shrink-0 w-32 h-32 mr-4">
         <img
