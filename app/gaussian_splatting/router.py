@@ -5,12 +5,12 @@ from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status
 from sqlalchemy.orm import Session
 
-# Corrected import to get user-related schemas from the new auth module
-from ..auth import schemas as auth_schemas
 from ..database import get_db
 from ..security import get_current_user
 from .. import models
 from . import crud, schemas
+# Import the shared Celery app instance to trigger background tasks
+from ..celery_app import celery_app
 
 router = APIRouter(
     prefix="/splatting",
@@ -27,16 +27,14 @@ async def create_splatting_job_endpoint(
     current_user: models.User = Depends(get_current_user)
 ):
     """
-    Handles image uploads, creates a unique directory for the job,
-    and creates a job record in the database.
+    Handles image uploads, creates a job record, and triggers the background worker.
     """
-    # Create a unique directory for this job using user ID and a timestamp
+    # Create a unique directory for this job to prevent file collisions
     job_dir = MEDIA_ROOT / str(current_user.id) / str(datetime.now(timezone.utc).timestamp())
     job_dir.mkdir(parents=True, exist_ok=True)
 
-    # Save uploaded files
+    # Save all the uploaded files to the unique job directory
     for file in files:
-        # Basic validation for image files
         if not file.content_type.startswith("image/"):
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Only image files are allowed.")
         try:
@@ -46,8 +44,13 @@ async def create_splatting_job_endpoint(
         finally:
             file.file.close()
     
-    # Create the job record in the database
+    # Create the job record in the database with a 'pending' status
     db_job = crud.create_splatting_job(db=db, user_id=current_user.id, input_path=str(job_dir))
+
+    # --- TRIGGER THE BACKGROUND TASK ---
+    # Send the job ID to the Celery worker to start processing.
+    celery_app.send_task("process_splatting_job", args=[db_job.id])
+
     return db_job
 
 @router.get("/jobs/{job_id}", response_model=schemas.SplattingJob)
@@ -80,3 +83,4 @@ def get_user_jobs(
     """
     jobs = crud.get_splatting_jobs_by_user(db, user_id=current_user.id, skip=skip, limit=limit)
     return jobs
+
