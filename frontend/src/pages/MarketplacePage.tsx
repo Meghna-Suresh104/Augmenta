@@ -34,15 +34,15 @@ const MarketplacePage = () => {
     : handicrafts.filter(item => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-no-repeat text-white "
-  style={{ backgroundImage: "url('/src/assets/bg.png')" }}>
+    <div className="min-h-screen bg-cover bg-center bg-no-repeat text-black"
+   style={{ backgroundImage: "url('/bg.png')" }}>
       <Header />
 
       <main className="flex-1 pb-20 px-4 sm:px-6 lg:px-8 py-6">
         {/* Filters */}
         <div className="max-w-7xl mx-auto mb-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <h2 className="text-2xl font-bold">Cultural Marketplace</h2>
+            <h2 className="text-2xl text-white font-bold">Cultural Marketplace</h2>
             
           </div>
 

@@ -15,6 +15,7 @@ interface Thread {
 }
 
 const ForumPage = () => {
+  const [searchValue, setSearchValue] = useState(""); // Added for Header
   const [threads, setThreads] = useState<Thread[]>([
     {
       id: "1",
@@ -68,14 +69,15 @@ const ForumPage = () => {
   return (
     <div
       className="min-h-screen bg-cover bg-center bg-no-repeat text-white"
-      style={{ backgroundImage: "url('/src/assets/bg.png')" }}
+      style={{ backgroundImage: "url('/bg.png')" }}
     >
-      <Header />
+      {/* Header with search */}
+      <Header searchValue={searchValue} setSearchValue={setSearchValue} />
 
       <main className="max-w-4xl mx-auto px-6 py-6 pb-32">
         {/* Header & Post Button */}
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Discussion Forum</h1>
+          <h1 className="text-2xl font-bold text-white">Discussion Forum</h1>
           <Button className="bg-blue-500 hover:bg-blue-600 text-white">
             Post Question
           </Button>
@@ -135,6 +137,7 @@ const ForumPage = () => {
         </div>
       </main>
 
+      {/* Bottom Navbar */}
       <BottomNavbar />
     </div>
   );

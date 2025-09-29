@@ -42,6 +42,14 @@ const Header = ({ searchValue, setSearchValue }: HeaderProps) => {
           <Button className="hover:bg-accent p-2 rounded-full text-white">
             <ShoppingCart className="h-5 w-5" />
           </Button>
+
+          {/* Login & Sign Up Buttons */}
+          <Button className="px-4 py-2 bg-yellow-400 text-black font-semibold rounded-xl hover:bg-yellow-500 transition">
+            Login
+          </Button>
+          <Button className="px-4 py-2 bg-yellow-400 text-black font-semibold rounded-xl hover:bg-yellow-500 transition">
+            Sign Up
+          </Button>
         </div>
       </div>
     </header>

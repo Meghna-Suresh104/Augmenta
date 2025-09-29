@@ -12,6 +12,7 @@ interface HandicraftCardProps {
   reviews: number;
   category: string;
   artisan: string;
+  className?: string;
 }
 
 const HandicraftCard = ({

@@ -10,6 +10,8 @@ import hampiImg from '@/assets/Hampi.jpg';
 import caveImg from '@/assets/cave.jpg';
 import templeImg from '@/assets/temple.jpg';
 import mysoreImg from '@/assets/mysore.jpg';
+import { auth, signInWithGoogle, logout } from '@/config/firebase';
+
 
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -44,7 +46,7 @@ const Index = () => {
   return (
     <div
       className="min-h-screen bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/src/assets/bg.png')" }}
+      style={{ backgroundImage: "url('/bg.png')" }}
     >
       <Header searchValue={searchValue} setSearchValue={setSearchValue} />
 
